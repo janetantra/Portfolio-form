@@ -1,797 +1,1172 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kagura Chicken Pastil - Arabic Twist</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --spice-red: #B8241D;
-            --spice-orange: #E85D3A;
-            --desert-gold: #D4A574;
-            --warm-cream: #F4E8D8;
-            --deep-brown: #2B1810;
-            --charcoal: #1A1310;
-            --soft-white: #FFF9F5;
-            --accent-bronze: #CD7F32;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Lora', serif;
-            background: var(--charcoal);
-            color: var(--soft-white);
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-
-        /* Decorative Pattern Background */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                repeating-linear-gradient(
-                    45deg,
-                    transparent,
-                    transparent 35px,
-                    rgba(212, 175, 55, 0.02) 35px,
-                    rgba(212, 175, 55, 0.02) 70px
-                );
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .container {
-            position: relative;
-            z-index: 1;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            position: relative;
-            padding: 100px 20px;
-            background: 
-                linear-gradient(135deg, rgba(27, 19, 16, 0.95), rgba(43, 24, 16, 0.9)),
-                url('/mnt/user-data/uploads/preview.webp') center center;
-            background-size: cover;
-            background-attachment: fixed;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(ellipse at top left, rgba(184, 36, 29, 0.3), transparent 50%),
-                radial-gradient(ellipse at bottom right, rgba(212, 165, 116, 0.2), transparent 50%);
-            pointer-events: none;
-        }
-
-        .hero::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                repeating-linear-gradient(
-                    0deg,
-                    transparent,
-                    transparent 2px,
-                    rgba(212, 165, 116, 0.03) 2px,
-                    rgba(212, 165, 116, 0.03) 4px
-                );
-            pointer-events: none;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
-        }
-
-        .logo {
-            font-family: 'Cinzel', serif;
-            font-size: clamp(3rem, 8vw, 7rem);
-            font-weight: 800;
-            color: var(--desert-gold);
-            text-shadow: 
-                0 0 30px rgba(212, 175, 55, 0.5),
-                0 0 60px rgba(196, 30, 58, 0.3);
-            margin-bottom: 20px;
-            letter-spacing: 8px;
-            animation: glowPulse 3s ease-in-out infinite;
-        }
-
-        @keyframes glowPulse {
-            0%, 100% { text-shadow: 0 0 30px rgba(212, 175, 55, 0.5), 0 0 60px rgba(196, 30, 58, 0.3); }
-            50% { text-shadow: 0 0 50px rgba(212, 175, 55, 0.8), 0 0 90px rgba(196, 30, 58, 0.5); }
-        }
-
-        .tagline {
-            font-family: 'Cinzel', serif;
-            font-size: clamp(1.2rem, 3vw, 2rem);
-            color: var(--warm-cream);
-            margin-bottom: 30px;
-            font-weight: 400;
-            letter-spacing: 3px;
-            opacity: 0;
-            animation: fadeInUp 1s ease-out 0.5s forwards;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .subtitle {
-            font-size: clamp(1rem, 2vw, 1.4rem);
-            color: var(--soft-white);
-            max-width: 700px;
-            margin: 0 auto 50px;
-            font-style: italic;
-            opacity: 0;
-            animation: fadeInUp 1s ease-out 0.8s forwards;
-        }
-
-        .hero-cta {
-            display: inline-block;
-            padding: 20px 50px;
-            background: linear-gradient(135deg, var(--spice-red), var(--spice-orange));
-            color: var(--soft-white);
-            text-decoration: none;
-            font-size: 1.3rem;
-            font-weight: 600;
-            border-radius: 50px;
-            box-shadow: 
-                0 10px 30px rgba(196, 30, 58, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-            opacity: 0;
-            animation: fadeInUp 1s ease-out 1.1s forwards;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-cta::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .hero-cta:hover::before {
-            left: 100%;
-        }
-
-        .hero-cta:hover {
-            transform: translateY(-3px);
-            box-shadow: 
-                0 15px 40px rgba(196, 30, 58, 0.6),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
-        }
-
-        /* Features Section */
-        .features {
-            padding: 100px 20px;
-            background: linear-gradient(180deg, var(--charcoal) 0%, var(--deep-brown) 100%);
-        }
-
-        .section-title {
-            font-family: 'Cinzel', serif;
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            text-align: center;
-            margin-bottom: 80px;
-            color: var(--desert-gold);
-            letter-spacing: 5px;
-            position: relative;
-            display: inline-block;
-            width: 100%;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 150px;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, var(--spice-orange), transparent);
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 40px;
-            margin-top: 60px;
-        }
-
-        .feature-card {
-            background: rgba(255, 248, 240, 0.05);
-            border: 2px solid rgba(212, 175, 55, 0.2);
-            border-radius: 20px;
-            padding: 40px 30px;
-            text-align: center;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(212, 175, 55, 0.1), transparent 70%);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .feature-card:hover::before {
-            opacity: 1;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--desert-gold);
-            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.3);
-        }
-
-        .feature-icon {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            display: block;
-            animation: bounce 2s ease-in-out infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .feature-card:nth-child(1) .feature-icon { animation-delay: 0s; }
-        .feature-card:nth-child(2) .feature-icon { animation-delay: 0.2s; }
-        .feature-card:nth-child(3) .feature-icon { animation-delay: 0.4s; }
-        .feature-card:nth-child(4) .feature-icon { animation-delay: 0.6s; }
-
-        .feature-title {
-            font-family: 'Cinzel', serif;
-            font-size: 1.5rem;
-            color: var(--desert-gold);
-            margin-bottom: 15px;
-            letter-spacing: 2px;
-        }
-
-        .feature-description {
-            color: var(--warm-cream);
-            font-size: 1.1rem;
-            line-height: 1.8;
-        }
-
-        /* Product Showcase */
-        .product-showcase {
-            padding: 100px 20px;
-            background: var(--deep-brown);
-            position: relative;
-        }
-
-        .showcase-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .showcase-text h2 {
-            font-family: 'Cinzel', serif;
-            font-size: clamp(2rem, 4vw, 3.5rem);
-            color: var(--desert-gold);
-            margin-bottom: 30px;
-            letter-spacing: 3px;
-        }
-
-        .showcase-text p {
-            font-size: 1.2rem;
-            color: var(--warm-cream);
-            margin-bottom: 20px;
-            line-height: 1.9;
-        }
-
-        .highlight {
-            color: var(--spice-orange);
-            font-weight: 600;
-            font-style: italic;
-        }
-
-        .product-details {
-            margin-top: 40px;
-        }
-
-        .detail-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            padding: 15px;
-            background: rgba(212, 175, 55, 0.1);
-            border-left: 4px solid var(--desert-gold);
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .detail-item:hover {
-            background: rgba(212, 175, 55, 0.2);
-            transform: translateX(10px);
-        }
-
-        .detail-item::before {
-            content: '✓';
-            font-size: 1.5rem;
-            color: var(--spice-orange);
-            margin-right: 15px;
-            font-weight: bold;
-        }
-
-        /* Product Gallery */
-        .product-gallery {
-            padding: 100px 20px;
-            background: var(--charcoal);
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 60px;
-        }
-
-        .gallery-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: 20px;
-            aspect-ratio: 1;
-            cursor: pointer;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            transition: all 0.5s ease;
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.1);
-        }
-
-        .gallery-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(196, 30, 58, 0.95), transparent);
-            padding: 30px 20px;
-            transform: translateY(100%);
-            transition: transform 0.5s ease;
-        }
-
-        .gallery-item:hover .gallery-overlay {
-            transform: translateY(0);
-        }
-
-        .gallery-overlay h3 {
-            font-family: 'Cinzel', serif;
-            color: var(--desert-gold);
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            letter-spacing: 2px;
-        }
-
-        .gallery-overlay p {
-            color: var(--warm-cream);
-            font-size: 1.1rem;
-        }
-
-        .gallery-item:hover {
-            box-shadow: 0 20px 50px rgba(212, 175, 55, 0.4);
-            transform: translateY(-10px);
-        }
-
-        /* Pricing */
-        .pricing {
-            padding: 100px 20px;
-            background: linear-gradient(180deg, var(--deep-brown) 0%, var(--charcoal) 100%);
-            text-align: center;
-        }
-
-        .price-box {
-            max-width: 600px;
-            margin: 60px auto;
-            padding: 60px 40px;
-            background: rgba(255, 248, 240, 0.05);
-            border: 3px solid var(--desert-gold);
-            border-radius: 30px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .price-box::before {
-            content: '🌶️';
-            position: absolute;
-            top: -30px;
-            right: -30px;
-            font-size: 200px;
-            opacity: 0.05;
-            transform: rotate(-15deg);
-        }
-
-        .price-label {
-            font-family: 'Cinzel', serif;
-            font-size: 1.5rem;
-            color: var(--warm-cream);
-            margin-bottom: 20px;
-            letter-spacing: 3px;
-        }
-
-        .price {
-            font-family: 'Cinzel', serif;
-            font-size: 5rem;
-            color: var(--desert-gold);
-            font-weight: 800;
-            margin-bottom: 15px;
-            text-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
-        }
-
-        .price-currency {
-            font-size: 3rem;
-            vertical-align: super;
-        }
-
-        .price-detail {
-            color: var(--warm-cream);
-            font-size: 1.2rem;
-            margin-bottom: 40px;
-        }
-
-        .order-btn {
-            display: inline-block;
-            padding: 25px 60px;
-            background: linear-gradient(135deg, var(--spice-red), var(--spice-orange));
-            color: var(--soft-white);
-            text-decoration: none;
-            font-size: 1.5rem;
-            font-weight: 600;
-            border-radius: 50px;
-            box-shadow: 
-                0 15px 40px rgba(196, 30, 58, 0.5),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-            font-family: 'Cinzel', serif;
-            letter-spacing: 2px;
-        }
-
-        .order-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 
-                0 20px 50px rgba(196, 30, 58, 0.7),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
-        }
-
-        /* Contact Section */
-        .contact {
-            padding: 100px 20px;
-            background: var(--charcoal);
-            text-align: center;
-        }
-
-        .contact-info {
-            max-width: 800px;
-            margin: 60px auto;
-        }
-
-        .contact-item {
-            margin: 30px 0;
-            font-size: 1.3rem;
-            color: var(--warm-cream);
-        }
-
-        .contact-item a {
-            color: var(--desert-gold);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            font-weight: 600;
-        }
-
-        .contact-item a:hover {
-            color: var(--spice-orange);
-            text-shadow: 0 0 20px rgba(217, 118, 54, 0.5);
-        }
-
-        /* Footer */
-        footer {
-            background: var(--deep-brown);
-            padding: 40px 20px;
-            text-align: center;
-            border-top: 2px solid rgba(212, 175, 55, 0.2);
-        }
-
-        footer p {
-            color: var(--warm-cream);
-            font-size: 1.1rem;
-        }
-
-        footer a {
-            color: var(--desert-gold);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        footer a:hover {
-            color: var(--spice-orange);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .showcase-content {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-
-            .gallery-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .hero::before,
-            .hero::after {
-                font-size: 60px;
-            }
-
-            .logo {
-                letter-spacing: 4px;
-            }
-
-            .tagline {
-                letter-spacing: 2px;
-            }
-
-            .price {
-                font-size: 3.5rem;
-            }
-
-            .price-currency {
-                font-size: 2rem;
-            }
-        }
-
-        /* Scroll Reveal Animation */
-        .reveal {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s ease-out;
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PortfolioForge — Client Intake Form</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:        #0a0a0f;
+    --surface:   #111118;
+    --card:      #16161f;
+    --border:    #2a2a3a;
+    --border-focus: #7c6af7;
+    --accent:    #7c6af7;
+    --accent2:   #a78bfa;
+    --gold:      #f4b942;
+    --text:      #e8e8f0;
+    --muted:     #7a7a9a;
+    --error:     #f87171;
+    --success:   #34d399;
+    --radius:    10px;
+    --font-display: 'Syne', sans-serif;
+    --font-body:    'Inter', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, #0f0f1a 0%, #12101e 60%, #0a0a0f 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 56px 24px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(124,106,247,.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+  .brand-icon {
+    width: 36px; height: 36px;
+    background: linear-gradient(135deg, var(--accent), var(--gold));
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+  }
+  .brand-name {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 20px;
+    letter-spacing: -.5px;
+  }
+  .brand-name span { color: var(--accent2); }
+
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 800;
+    letter-spacing: -1.5px;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+  .hero h1 em { font-style: normal; color: var(--accent2); }
+  .hero p {
+    color: var(--muted);
+    font-size: 15px;
+    max-width: 520px;
+    margin: 0 auto 24px;
+  }
+  .progress-bar-wrap {
+    max-width: 340px;
+    margin: 0 auto;
+    background: var(--border);
+    border-radius: 99px;
+    height: 4px;
+    overflow: hidden;
+  }
+  .progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--accent), var(--gold));
+    border-radius: 99px;
+    transition: width .4s ease;
+  }
+  .progress-label {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 8px;
+    letter-spacing: .5px;
+  }
+
+  /* ── LAYOUT ── */
+  .form-wrap {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+  }
+
+  /* ── SECTION ── */
+  .section {
+    margin-top: 48px;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-num {
+    width: 32px; height: 32px; min-width: 32px;
+    background: linear-gradient(135deg, var(--accent), #9f8bf7);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -.3px;
+  }
+  .section-sub {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  /* ── FIELD GRID ── */
+  .field-grid { display: grid; gap: 18px; }
+  .field-grid.two { grid-template-columns: 1fr 1fr; }
+  @media(max-width:600px){ .field-grid.two { grid-template-columns: 1fr; } }
+
+  /* ── FIELD ── */
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  .field label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    letter-spacing: .2px;
+  }
+  .field label .req { color: var(--accent2); margin-left: 3px; }
+  .field .hint {
+    font-size: 11.5px;
+    color: var(--muted);
+    margin-top: -2px;
+  }
+  .field input,
+  .field textarea,
+  .field select {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 14px;
+    padding: 11px 14px;
+    outline: none;
+    transition: border-color .2s, box-shadow .2s;
+    width: 100%;
+    appearance: none;
+  }
+  .field input::placeholder,
+  .field textarea::placeholder { color: var(--muted); }
+  .field input:focus,
+  .field textarea:focus,
+  .field select:focus {
+    border-color: var(--border-focus);
+    box-shadow: 0 0 0 3px rgba(124,106,247,.15);
+  }
+  .field input.error,
+  .field textarea.error { border-color: var(--error); }
+  .field textarea { resize: vertical; min-height: 100px; }
+  .field select { cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%237a7a9a' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
+
+  /* ── CHECKBOX GROUP ── */
+  .check-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+  }
+  .check-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    cursor: pointer;
+    transition: border-color .2s, background .2s;
+    user-select: none;
+  }
+  .check-item:hover { border-color: var(--accent); }
+  .check-item input[type="checkbox"] { display: none; }
+  .check-box {
+    width: 18px; height: 18px; min-width: 18px;
+    border: 2px solid var(--border);
+    border-radius: 5px;
+    display: flex; align-items: center; justify-content: center;
+    transition: background .2s, border-color .2s;
+  }
+  .check-item.active { border-color: var(--accent); background: rgba(124,106,247,.08); }
+  .check-item.active .check-box { background: var(--accent); border-color: var(--accent); }
+  .check-item.active .check-box::after { content:'✓'; color:#fff; font-size:11px; font-weight:700; }
+  .check-label { font-size: 13px; color: var(--text); }
+
+  /* ── RADIO GROUP ── */
+  .radio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 10px;
+  }
+  .radio-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    cursor: pointer;
+    transition: border-color .2s;
+    user-select: none;
+  }
+  .radio-item:hover { border-color: var(--accent); }
+  .radio-item input { display: none; }
+  .radio-dot {
+    width: 18px; height: 18px; min-width: 18px;
+    border: 2px solid var(--border);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    transition: border-color .2s;
+  }
+  .radio-item.active { border-color: var(--accent); background: rgba(124,106,247,.08); }
+  .radio-item.active .radio-dot { border-color: var(--accent); }
+  .radio-item.active .radio-dot::after { content:''; width:8px; height:8px; background:var(--accent); border-radius:50%; }
+
+  /* ── PROJECT / TESTIMONIAL CARD ── */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+  }
+  .card-label {
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent2);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-label::before {
+    content:'';
+    width:4px; height:16px;
+    background: linear-gradient(var(--accent), var(--gold));
+    border-radius:2px;
+  }
+
+  /* ── ADD BTN ── */
+  .add-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    border: 1px dashed var(--border);
+    border-radius: var(--radius);
+    color: var(--muted);
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: 13px;
+    padding: 12px 18px;
+    width: 100%;
+    transition: border-color .2s, color .2s;
+    margin-top: 4px;
+  }
+  .add-btn:hover { border-color: var(--accent); color: var(--accent2); }
+
+  /* ── FILE UPLOAD ── */
+  .file-drop {
+    border: 1.5px dashed var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color .2s;
+    background: var(--card);
+    position: relative;
+  }
+  .file-drop:hover { border-color: var(--accent); }
+  .file-drop input[type="file"] {
+    position: absolute; inset: 0;
+    opacity: 0; cursor: pointer;
+    width: 100%; height: 100%;
+  }
+  .file-drop-icon { font-size: 28px; margin-bottom: 8px; }
+  .file-drop p { font-size: 13px; color: var(--muted); }
+  .file-drop strong { color: var(--accent2); font-weight: 500; }
+  .file-list { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .file-tag {
+    background: rgba(124,106,247,.15);
+    border: 1px solid rgba(124,106,247,.3);
+    border-radius: 6px;
+    color: var(--accent2);
+    font-size: 12px;
+    padding: 4px 10px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .file-tag button { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 14px; line-height:1; }
+
+  /* ── DIVIDER ── */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 32px 0;
+  }
+
+  /* ── SUBMIT ── */
+  .submit-section {
+    margin-top: 48px;
+    padding: 36px 32px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    text-align: center;
+  }
+  .submit-section h3 {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .submit-section p {
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 24px;
+  }
+  .btn-submit {
+    background: linear-gradient(135deg, var(--accent) 0%, #9f6af7 100%);
+    border: none;
+    border-radius: var(--radius);
+    color: #fff;
+    cursor: pointer;
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: .3px;
+    padding: 15px 48px;
+    transition: opacity .2s, transform .15s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .btn-submit:hover { opacity: .9; transform: translateY(-1px); }
+  .btn-submit:active { transform: none; }
+
+  /* ── SUCCESS ── */
+  .success-screen {
+    display: none;
+    text-align: center;
+    padding: 80px 24px;
+  }
+  .success-screen.show { display: block; }
+  .success-icon {
+    width: 72px; height: 72px;
+    background: rgba(52,211,153,.1);
+    border: 2px solid var(--success);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 32px;
+    margin: 0 auto 24px;
+  }
+  .success-screen h2 {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 800;
+    margin-bottom: 12px;
+  }
+  .success-screen p { color: var(--muted); max-width: 400px; margin: 0 auto; }
+
+  /* ── ERROR MSG ── */
+  .field-error {
+    font-size: 11.5px;
+    color: var(--error);
+    margin-top: -2px;
+  }
+
+  /* ── TOAST ── */
+  #toast {
+    position: fixed;
+    bottom: 24px; right: 24px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 20px;
+    font-size: 13px;
+    display: flex; align-items: center; gap: 10px;
+    box-shadow: 0 12px 32px rgba(0,0,0,.5);
+    transform: translateY(80px);
+    opacity: 0;
+    transition: transform .3s, opacity .3s;
+    z-index: 999;
+    max-width: 320px;
+  }
+  #toast.show { transform: translateY(0); opacity: 1; }
+  #toast.error { border-color: var(--error); }
+  #toast.ok { border-color: var(--success); }
+
+  @media(max-width:480px){
+    .hero { padding: 40px 16px 36px; }
+    .form-wrap { padding: 0 14px 60px; }
+    .submit-section { padding: 24px 20px; }
+  }
+</style>
 </head>
 <body>
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <h1 class="logo">KAGURA</h1>
-            <p class="tagline">Chicken Pastil · Arabic Twist</p>
-            <p class="subtitle">Experience the fusion of classic comfort food infused with authentic Middle Eastern spices</p>
-            <a href="#order" class="hero-cta">Order Now</a>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="brand">
+    <div class="brand-icon">⚡</div>
+    <span class="brand-name">Portfolio<span>Forge</span></span>
+  </div>
+  <h1>Build Your <em>Portfolio</em><br>in Minutes</h1>
+  <p>Fill in your details below and we'll craft a professional portfolio website tailored to your brand and skills.</p>
+  <div class="progress-bar-wrap">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+  <div class="progress-label" id="progressLabel">0% complete</div>
+</div>
+
+<!-- FORM -->
+<div class="form-wrap">
+<form id="mainForm" novalidate>
+
+  <!-- 1. PERSONAL -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">01</div>
+      <div>
+        <div class="section-title">Personal Information</div>
+        <div class="section-sub">Basic contact and identity details</div>
+      </div>
+    </div>
+    <div class="field-grid two">
+      <div class="field">
+        <label>Full Name <span class="req">*</span></label>
+        <input type="text" id="fullName" placeholder="e.g. Maria Santos" required />
+      </div>
+      <div class="field">
+        <label>Professional Title <span class="req">*</span></label>
+        <input type="text" id="proTitle" placeholder="e.g. Executive VA | GoHighLevel Specialist" required />
+      </div>
+    </div>
+    <div class="field-grid" style="margin-top:18px;">
+      <div class="field">
+        <label>Professional Tagline <span class="req">*</span></label>
+        <span class="hint">One-liner shown on your homepage hero section</span>
+        <input type="text" id="tagline" placeholder="e.g. Helping businesses scale through smart automation." required />
+      </div>
+    </div>
+    <div class="field-grid two" style="margin-top:18px;">
+      <div class="field">
+        <label>Location</label>
+        <input type="text" id="location" placeholder="e.g. Davao City, Philippines" />
+      </div>
+      <div class="field">
+        <label>Email Address <span class="req">*</span></label>
+        <input type="email" id="email" placeholder="you@email.com" required />
+      </div>
+      <div class="field">
+        <label>WhatsApp Number</label>
+        <input type="tel" id="whatsapp" placeholder="+63 9XX XXX XXXX" />
+      </div>
+      <div class="field">
+        <label>Phone Number</label>
+        <input type="tel" id="phone" placeholder="+63 9XX XXX XXXX" />
+      </div>
+    </div>
+    <div class="field-grid" style="margin-top:18px;">
+      <div class="field">
+        <label>Profile Photo</label>
+        <span class="hint">High-quality professional headshot (JPG or PNG, min 400×400px)</span>
+        <div class="file-drop" id="photoDrop">
+          <input type="file" accept="image/*" onchange="handleFile(this,'photoList')" />
+          <div class="file-drop-icon">📸</div>
+          <p>Drag & drop your photo here, or <strong>click to browse</strong></p>
         </div>
-    </section>
+        <div class="file-list" id="photoList"></div>
+      </div>
+    </div>
+  </div>
 
-    <!-- Features Section -->
-    <section class="features">
-        <div class="container">
-            <h2 class="section-title">What Makes Us Special</h2>
-            <div class="features-grid">
-                <div class="feature-card reveal">
-                    <span class="feature-icon">🥩</span>
-                    <h3 class="feature-title">Pure Meat</h3>
-                    <p class="feature-description">No extenders, no fillers. Just authentic, high-quality chicken.</p>
-                </div>
-                <div class="feature-card reveal">
-                    <span class="feature-icon">🌿</span>
-                    <h3 class="feature-title">All Natural</h3>
-                    <p class="feature-description">Absolutely no preservatives. Fresh ingredients, traditional preparation.</p>
-                </div>
-                <div class="feature-card reveal">
-                    <span class="feature-icon">✨</span>
-                    <h3 class="feature-title">Halal Certified</h3>
-                    <p class="feature-description">Prepared with care and integrity, following Halal standards.</p>
-                </div>
-                <div class="feature-card reveal">
-                    <span class="feature-icon">🏺</span>
-                    <h3 class="feature-title">Big Value</h3>
-                    <p class="feature-description">350g of pure goodness in every jar. Quality meets quantity.</p>
-                </div>
-            </div>
+  <!-- 2. ABOUT -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">02</div>
+      <div>
+        <div class="section-title">About You</div>
+        <div class="section-sub">Your story, experience, and what drives you</div>
+      </div>
+    </div>
+    <div class="field-grid">
+      <div class="field">
+        <label>Professional Bio <span class="req">*</span></label>
+        <span class="hint">3–5 sentences covering your background, industries served, and what makes you different</span>
+        <textarea id="bio" rows="5" placeholder="I'm a results-driven VA with 5+ years helping e-commerce brands and coaches streamline their operations…" required></textarea>
+      </div>
+    </div>
+    <div class="field-grid" style="margin-top:18px;">
+      <div class="field">
+        <label>Years of Experience <span class="req">*</span></label>
+        <select id="yearsExp" required>
+          <option value="">Select range</option>
+          <option>Less than 1 year</option>
+          <option>1–2 years</option>
+          <option>3–5 years</option>
+          <option>5–8 years</option>
+          <option>8+ years</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. SERVICES -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">03</div>
+      <div>
+        <div class="section-title">Services Offered</div>
+        <div class="section-sub">Select all that apply</div>
+      </div>
+    </div>
+    <div class="check-grid" id="servicesGrid">
+      <!-- populated by JS -->
+    </div>
+    <div class="field-grid" style="margin-top:16px;">
+      <div class="field">
+        <label>Other Services</label>
+        <input type="text" id="otherServices" placeholder="e.g. Podcast Management, NFT Setup…" />
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. SKILLS & TOOLS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">04</div>
+      <div>
+        <div class="section-title">Skills &amp; Tools</div>
+        <div class="section-sub">List all platforms and software you're proficient with</div>
+      </div>
+    </div>
+    <div class="field-grid">
+      <div class="field">
+        <label>Tools &amp; Platforms <span class="req">*</span></label>
+        <span class="hint">Separate with commas — e.g. GoHighLevel, n8n, Airtable, ClickUp, Canva</span>
+        <textarea id="tools" rows="3" placeholder="GoHighLevel, Make.com, n8n, Airtable, ClickUp, Supabase, OpenAI, Claude AI, Google Sheets…" required></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. PORTFOLIO PROJECTS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">05</div>
+      <div>
+        <div class="section-title">Portfolio Projects</div>
+        <div class="section-sub">Add at least 3 projects that showcase your work</div>
+      </div>
+    </div>
+    <div id="projectsContainer"></div>
+    <button type="button" class="add-btn" onclick="addProject()">
+      <span>＋</span> Add Another Project
+    </button>
+  </div>
+
+  <!-- 6. WORK EXPERIENCE -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">06</div>
+      <div>
+        <div class="section-title">Work Experience</div>
+        <div class="section-sub">Previous roles and positions</div>
+      </div>
+    </div>
+    <div id="experienceContainer"></div>
+    <button type="button" class="add-btn" onclick="addExperience()">
+      <span>＋</span> Add Another Role
+    </button>
+  </div>
+
+  <!-- 7. CERTIFICATIONS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">07</div>
+      <div>
+        <div class="section-title">Certifications &amp; Training</div>
+        <div class="section-sub">Courses, certificates, and programs you've completed</div>
+      </div>
+    </div>
+    <div class="field-grid">
+      <div class="field">
+        <label>Certifications</label>
+        <span class="hint">One per line or comma-separated</span>
+        <textarea id="certs" rows="4" placeholder="GoHighLevel Certification&#10;Google Digital Marketing Certification&#10;HubSpot Content Marketing Certification"></textarea>
+      </div>
+    </div>
+    <div class="field-grid" style="margin-top:18px;">
+      <div class="field">
+        <label>Certificate Files</label>
+        <div class="file-drop">
+          <input type="file" accept=".pdf,image/*" multiple onchange="handleFile(this,'certList')" />
+          <div class="file-drop-icon">📜</div>
+          <p>Upload certificates (PDF or image)</p>
         </div>
-    </section>
+        <div class="file-list" id="certList"></div>
+      </div>
+    </div>
+  </div>
 
-    <!-- Product Showcase -->
-    <section class="product-showcase">
-        <div class="container">
-            <div class="showcase-content">
-                <div class="showcase-text reveal">
-                    <h2>The Fusion You've Been Craving</h2>
-                    <p>Love Chicken Pastil but looking for something <span class="highlight">extra</span>?</p>
-                    <p>We've taken the classic comfort food and infused it with <span class="highlight">authentic Middle Eastern spices</span> for a flavor profile you won't find anywhere else.</p>
-                    <div class="product-details">
-                        <div class="detail-item">Pure Meat: No extenders, no fillers</div>
-                        <div class="detail-item">All Natural: No preservatives</div>
-                        <div class="detail-item">Halal Certified: Prepared with integrity</div>
-                        <div class="detail-item">350g per jar: Big value</div>
-                        <div class="detail-item">Perfect for rice, breakfast, or easy meals</div>
-                    </div>
-                </div>
-                <div class="showcase-image reveal">
-                    <img src="/mnt/user-data/uploads/Gemini_Generated_Image_wj2m95wj2m95wj2m.png" alt="Kagura Chicken Pastil" style="width: 100%; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.5);">
-                </div>
-            </div>
+  <!-- 8. TESTIMONIALS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">08</div>
+      <div>
+        <div class="section-title">Client Testimonials</div>
+        <div class="section-sub">Social proof builds trust instantly</div>
+      </div>
+    </div>
+    <div id="testimonialsContainer"></div>
+    <button type="button" class="add-btn" onclick="addTestimonial()">
+      <span>＋</span> Add Another Testimonial
+    </button>
+  </div>
+
+  <!-- 9. SOCIAL LINKS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">09</div>
+      <div>
+        <div class="section-title">Social &amp; Links</div>
+        <div class="section-sub">Connect your online presence</div>
+      </div>
+    </div>
+    <div class="field-grid two">
+      <div class="field">
+        <label>LinkedIn</label>
+        <input type="url" id="linkedin" placeholder="https://linkedin.com/in/yourname" />
+      </div>
+      <div class="field">
+        <label>Facebook</label>
+        <input type="url" id="facebook" placeholder="https://facebook.com/yourname" />
+      </div>
+      <div class="field">
+        <label>Instagram</label>
+        <input type="url" id="instagram" placeholder="https://instagram.com/yourname" />
+      </div>
+      <div class="field">
+        <label>Upwork</label>
+        <input type="url" id="upwork" placeholder="https://upwork.com/freelancers/~xxx" />
+      </div>
+      <div class="field">
+        <label>OnlineJobs.ph</label>
+        <input type="url" id="onlinejobs" placeholder="https://onlinejobs.ph/jobseekers/xxx" />
+      </div>
+      <div class="field">
+        <label>Personal Website</label>
+        <input type="url" id="website" placeholder="https://yoursite.com" />
+      </div>
+    </div>
+  </div>
+
+  <!-- 10. RESUME -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">10</div>
+      <div>
+        <div class="section-title">Resume / CV</div>
+        <div class="section-sub">Upload your latest resume for download on your portfolio</div>
+      </div>
+    </div>
+    <div class="field-grid">
+      <div class="field">
+        <div class="file-drop">
+          <input type="file" accept=".pdf,.doc,.docx" onchange="handleFile(this,'resumeList')" />
+          <div class="file-drop-icon">📄</div>
+          <p>Upload your resume (PDF preferred)</p>
         </div>
-    </section>
+        <div class="file-list" id="resumeList"></div>
+      </div>
+    </div>
+  </div>
 
-    <!-- Product Gallery -->
-    <section class="product-gallery">
-        <div class="container">
-            <h2 class="section-title">Our Products</h2>
-            <div class="gallery-grid">
-                <div class="gallery-item reveal">
-                    <img src="/mnt/user-data/uploads/Gemini_Generated_Image_wj2m95wj2m95wj2m.png" alt="Kagura Spicy Chicken Pastil">
-                    <div class="gallery-overlay">
-                        <h3>Extra Spicy</h3>
-                        <p>For the heat seekers</p>
-                    </div>
-                </div>
-                <div class="gallery-item reveal">
-                    <img src="/mnt/user-data/uploads/Gemini_Generated_Image_gndanngndanngnda.png" alt="Kagura Spicy Chicken Pastil">
-                    <div class="gallery-overlay">
-                        <h3>Extra Spicy</h3>
-                        <p>Bold Arabic flavors</p>
-                    </div>
-                </div>
-                <div class="gallery-item reveal">
-                    <img src="/mnt/user-data/uploads/Gemini_Generated_Image_eeji11eeji11eeji.png" alt="Kagura Product Line">
-                    <div class="gallery-overlay">
-                        <h3>Premium Line</h3>
-                        <p>Multiple variants available</p>
-                    </div>
-                </div>
-                <div class="gallery-item reveal">
-                    <img src="/mnt/user-data/uploads/unnamed.jpg" alt="Serving Suggestion">
-                    <div class="gallery-overlay">
-                        <h3>Serving Suggestion</h3>
-                        <p>Perfect with hot rice</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <!-- 11. WEBSITE PREFERENCES -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">11</div>
+      <div>
+        <div class="section-title">Website Preferences</div>
+        <div class="section-sub">Help us match your personal aesthetic</div>
+      </div>
+    </div>
 
-    <!-- Pricing Section -->
-    <section class="pricing" id="order">
-        <div class="container">
-            <h2 class="section-title">Special Offer</h2>
-            <div class="price-box reveal">
-                <p class="price-label">Only</p>
-                <div class="price">
-                    <span class="price-currency">₱</span>225
-                </div>
-                <p class="price-detail">per jar · 350g</p>
-                <a href="#contact" class="order-btn">Send Message to Order</a>
-            </div>
-        </div>
-    </section>
+    <div class="field" style="margin-bottom:20px;">
+      <label>Color Scheme <span class="req">*</span></label>
+      <div class="radio-grid" id="colorGrid"></div>
+    </div>
 
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <div class="container">
-            <h2 class="section-title">Get In Touch</h2>
-            <div class="contact-info reveal">
-                <div class="contact-item">
-                    📧 Ready to order? <a href="mailto:marvincanonigo@gmail.com">Send us a message</a>
-                </div>
-                <div class="contact-item">
-                    💬 Questions? We're here to help!
-                </div>
-                <div class="contact-item">
-                    🚀 Fast delivery · Fresh product · Satisfaction guaranteed
-                </div>
-            </div>
-        </div>
-    </section>
+    <div class="field">
+      <label>Website Style <span class="req">*</span></label>
+      <div class="radio-grid" id="styleGrid"></div>
+    </div>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 Kagura Chicken Pastil. Crafted with passion.</p>
-            <p style="margin-top: 10px; font-size: 0.9rem;">
-                Website by <a href="https://janetantra.github.io/Portfolio/" target="_blank">Marvin Canonigo</a> · General VA & Automation Specialist
-            </p>
-        </div>
-    </footer>
+    <div class="field-grid" style="margin-top:18px;">
+      <div class="field">
+        <label>Primary Goal for Portfolio</label>
+        <select id="goal">
+          <option value="">Select a goal</option>
+          <option>Get hired by clients</option>
+          <option>Apply for remote jobs</option>
+          <option>Build personal brand</option>
+          <option>Showcase portfolio</option>
+          <option>Generate leads</option>
+          <option>Other</option>
+        </select>
+      </div>
+    </div>
 
-    <script>
-        // Scroll Reveal Animation
-        function reveal() {
-            const reveals = document.querySelectorAll('.reveal');
-            
-            reveals.forEach(element => {
-                const windowHeight = window.innerHeight;
-                const elementTop = element.getBoundingClientRect().top;
-                const elementVisible = 150;
-                
-                if (elementTop < windowHeight - elementVisible) {
-                    element.classList.add('active');
-                }
-            });
-        }
+    <div class="field-grid" style="margin-top:18px;">
+      <div class="field">
+        <label>Additional Notes</label>
+        <span class="hint">Anything else you want on your site — custom sections, special requests, inspiration links</span>
+        <textarea id="notes" rows="4" placeholder="I'd love a dark theme with purple accents. I also want a testimonials slider and a booking calendar section…"></textarea>
+      </div>
+    </div>
+  </div>
 
-        window.addEventListener('scroll', reveal);
-        reveal(); // Initial check on load
+  <!-- SUBMIT -->
+  <div class="submit-section">
+    <h3>Ready to Forge Your Portfolio? ⚡</h3>
+    <p>Review your entries, then hit submit. We'll reach out within 24 hours with your draft.</p>
+    <button type="submit" class="btn-submit">
+      Submit My Info &nbsp;→
+    </button>
+  </div>
 
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-    </script>
+</form>
+
+<!-- SUCCESS -->
+<div class="success-screen" id="successScreen">
+  <div class="success-icon">✓</div>
+  <h2>You're all set, let's build! 🚀</h2>
+  <p>Thanks for submitting your details. Expect a reply within 24 hours with your portfolio draft preview.</p>
+</div>
+
+</div><!-- /form-wrap -->
+
+<div id="toast"></div>
+
+<script>
+// ── DATA ──
+const SERVICES = [
+  "Executive Assistance","Administrative Support","Email Management","Calendar Management",
+  "Customer Support","Social Media Management","Content Creation","Graphic Design",
+  "Video Editing","Lead Generation","Appointment Setting","Data Entry",
+  "CRM Management","GoHighLevel","Automation Setup","Email Marketing",
+  "Bookkeeping","Project Management","E-commerce Support","SEO",
+  "Website Design","Funnel Building","AI Automation"
+];
+const COLORS = ["Blue & White","Black & Gold","Minimalist White","Dark Theme","Purple & Black","No Preference"];
+const STYLES = ["Corporate / Professional","Modern & Minimalist","Creative","Elegant / Premium","Bold & Dynamic"];
+const REQUIRED_IDS = ['fullName','proTitle','tagline','email','bio','yearsExp','tools'];
+
+// ── INIT ──
+let projectCount = 0, experienceCount = 0, testimonialCount = 0;
+
+function buildCheckboxes(items, containerId) {
+  const el = document.getElementById(containerId);
+  items.forEach(item => {
+    const div = document.createElement('label');
+    div.className = 'check-item';
+    div.innerHTML = `<input type="checkbox" value="${item}"><div class="check-box"></div><span class="check-label">${item}</span>`;
+    div.addEventListener('click', () => div.classList.toggle('active'));
+    el.appendChild(div);
+  });
+}
+
+function buildRadios(items, containerId, name) {
+  const el = document.getElementById(containerId);
+  items.forEach((item, i) => {
+    const div = document.createElement('label');
+    div.className = 'radio-item';
+    div.innerHTML = `<input type="radio" name="${name}" value="${item}"><div class="radio-dot"></div><span class="check-label">${item}</span>`;
+    div.addEventListener('click', () => {
+      document.querySelectorAll(`[data-rg="${containerId}"]`).forEach(r => r.classList.remove('active'));
+      div.classList.add('active');
+    });
+    div.setAttribute('data-rg', containerId);
+    el.appendChild(div);
+  });
+}
+
+buildCheckboxes(SERVICES, 'servicesGrid');
+buildRadios(COLORS, 'colorGrid', 'colorScheme');
+buildRadios(STYLES, 'styleGrid', 'siteStyle');
+
+// ── PROJECTS ──
+function addProject() {
+  projectCount++;
+  const n = projectCount;
+  const c = document.getElementById('projectsContainer');
+  const div = document.createElement('div');
+  div.className = 'card';
+  div.id = `project_${n}`;
+  div.innerHTML = `
+    <div class="card-label">Project #${n}</div>
+    <div class="field-grid">
+      <div class="field"><label>Project Title <span class="req">*</span></label><input type="text" name="proj_title_${n}" placeholder="e.g. Automated Lead Pipeline for SaaS Client" /></div>
+    </div>
+    <div class="field-grid two" style="margin-top:14px;">
+      <div class="field"><label>Client / Company Name</label><input type="text" name="proj_client_${n}" placeholder="(Optional)" /></div>
+      <div class="field"><label>Tools Used</label><input type="text" name="proj_tools_${n}" placeholder="e.g. GoHighLevel, Make.com, Airtable" /></div>
+    </div>
+    <div class="field-grid" style="margin-top:14px;">
+      <div class="field"><label>Project Description</label><textarea name="proj_desc_${n}" rows="3" placeholder="What did you build or manage? What was the challenge?"></textarea></div>
+    </div>
+    <div class="field-grid two" style="margin-top:14px;">
+      <div class="field"><label>Your Role</label><input type="text" name="proj_role_${n}" placeholder="e.g. Lead Automation Architect" /></div>
+      <div class="field"><label>Results / Impact</label><input type="text" name="proj_result_${n}" placeholder="e.g. Reduced manual work by 80%" /></div>
+    </div>
+    <div class="field-grid" style="margin-top:14px;">
+      <div class="field"><label>Project Link</label><input type="url" name="proj_link_${n}" placeholder="https://…" /></div>
+    </div>
+    <div class="field-grid" style="margin-top:14px;">
+      <div class="field">
+        <label>Project Screenshots</label>
+        <div class="file-drop"><input type="file" accept="image/*" multiple onchange="handleFile(this,'projImg_${n}')"><div class="file-drop-icon">🖼</div><p>Upload screenshots</p></div>
+        <div class="file-list" id="projImg_${n}"></div>
+      </div>
+    </div>
+  `;
+  c.appendChild(div);
+  updateProgress();
+}
+
+// ── EXPERIENCE ──
+function addExperience() {
+  experienceCount++;
+  const n = experienceCount;
+  const c = document.getElementById('experienceContainer');
+  const div = document.createElement('div');
+  div.className = 'card';
+  div.innerHTML = `
+    <div class="card-label">Role #${n}</div>
+    <div class="field-grid two">
+      <div class="field"><label>Company Name <span class="req">*</span></label><input type="text" name="exp_company_${n}" placeholder="e.g. Acme Corp" /></div>
+      <div class="field"><label>Position</label><input type="text" name="exp_position_${n}" placeholder="e.g. Operations VA" /></div>
+    </div>
+    <div class="field-grid" style="margin-top:14px;">
+      <div class="field"><label>Employment Dates</label><input type="text" name="exp_dates_${n}" placeholder="e.g. Jan 2022 – Present" /></div>
+    </div>
+    <div class="field-grid" style="margin-top:14px;">
+      <div class="field"><label>Key Responsibilities</label><textarea name="exp_resp_${n}" rows="3" placeholder="Managed executive calendars, automated reports via Airtable, coordinated team of 6…"></textarea></div>
+    </div>
+  `;
+  c.appendChild(div);
+  updateProgress();
+}
+
+// ── TESTIMONIALS ──
+function addTestimonial() {
+  testimonialCount++;
+  const n = testimonialCount;
+  const c = document.getElementById('testimonialsContainer');
+  const div = document.createElement('div');
+  div.className = 'card';
+  div.innerHTML = `
+    <div class="card-label">Testimonial #${n}</div>
+    <div class="field-grid two">
+      <div class="field"><label>Client Name</label><input type="text" name="t_name_${n}" placeholder="e.g. John Smith" /></div>
+      <div class="field"><label>Company / Title</label><input type="text" name="t_company_${n}" placeholder="e.g. CEO, StartupXYZ" /></div>
+    </div>
+    <div class="field-grid" style="margin-top:14px;">
+      <div class="field"><label>Testimonial</label><textarea name="t_text_${n}" rows="3" placeholder="Marvin transformed our operations…"></textarea></div>
+    </div>
+  `;
+  c.appendChild(div);
+  updateProgress();
+}
+
+// pre-populate 3 projects, 2 exp, 2 testimonials
+addProject(); addProject(); addProject();
+addExperience(); addExperience();
+addTestimonial(); addTestimonial();
+
+// ── FILE HANDLER ──
+function handleFile(input, listId) {
+  const list = document.getElementById(listId);
+  if(!list) return;
+  Array.from(input.files).forEach(f => {
+    const tag = document.createElement('div');
+    tag.className = 'file-tag';
+    tag.innerHTML = `📎 ${f.name} <button type="button" onclick="this.parentElement.remove()">×</button>`;
+    list.appendChild(tag);
+  });
+}
+
+// ── PROGRESS ──
+function updateProgress() {
+  let filled = 0;
+  const total = REQUIRED_IDS.length;
+  REQUIRED_IDS.forEach(id => {
+    const el = document.getElementById(id);
+    if(el && el.value.trim()) filled++;
+  });
+  const pct = Math.round((filled / total) * 100);
+  document.getElementById('progressBar').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = pct + '% complete';
+}
+document.querySelectorAll('input, textarea, select').forEach(el => {
+  el.addEventListener('input', updateProgress);
+  el.addEventListener('change', updateProgress);
+});
+
+// ── TOAST ──
+function toast(msg, type='ok') {
+  const t = document.getElementById('toast');
+  t.className = `show ${type}`;
+  t.innerHTML = (type==='ok'?'✅':'⚠️') + ' ' + msg;
+  setTimeout(() => t.className = '', 3500);
+}
+
+// ── VALIDATE ──
+function validate() {
+  let ok = true;
+  REQUIRED_IDS.forEach(id => {
+    const el = document.getElementById(id);
+    if(!el) return;
+    if(!el.value.trim()) {
+      el.classList.add('error');
+      ok = false;
+    } else {
+      el.classList.remove('error');
+    }
+  });
+  return ok;
+}
+
+// ── WHATSAPP via CallMeBot ──
+// SETUP: Send "I allow callmebot to send me messages" to +34 644 59 78 17 on WhatsApp first.
+// Then replace YOUR_CALLMEBOT_APIKEY below with the key they reply with.
+const WA_PHONE  = '639271500784';
+const WA_APIKEY = 'YOUR_CALLMEBOT_APIKEY'; // ← paste your key here after activating
+
+async function sendWhatsApp(message) {
+  const encoded = encodeURIComponent(message);
+  const url = `https://api.callmebot.com/whatsapp.php?phone=${WA_PHONE}&text=${encoded}&apikey=${WA_APIKEY}`;
+  const res = await fetch(url, { mode: 'no-cors' }); // no-cors is fine for CallMeBot
+  return true; // no-cors means we can't read the response; treat as sent
+}
+
+function buildMessage(data) {
+  const line = (label, val) => val ? `*${label}:* ${val}\n` : '';
+  const sep = '─────────────────\n';
+
+  let msg = `⚡ *NEW PORTFOLIOFORGE SUBMISSION*\n${sep}`;
+
+  // Personal
+  msg += `👤 *PERSONAL INFO*\n`;
+  msg += line('Name', data.personal.fullName);
+  msg += line('Title', data.personal.proTitle);
+  msg += line('Tagline', data.personal.tagline);
+  msg += line('Location', data.personal.location);
+  msg += line('Email', data.personal.email);
+  msg += line('WhatsApp', data.personal.whatsapp);
+  msg += line('Phone', data.personal.phone);
+  msg += sep;
+
+  // About
+  msg += `📝 *ABOUT*\n`;
+  msg += line('Experience', data.about.yearsExp);
+  msg += `*Bio:* ${data.about.bio.substring(0,200)}${data.about.bio.length>200?'…':''}\n`;
+  msg += sep;
+
+  // Services
+  if(data.services.length) {
+    msg += `🛠 *SERVICES*\n${data.services.join(', ')}\n`;
+    if(data.otherServices) msg += `Other: ${data.otherServices}\n`;
+    msg += sep;
+  }
+
+  // Tools
+  msg += `💻 *TOOLS & STACK*\n${data.tools}\n${sep}`;
+
+  // Projects
+  if(data.projects.length) {
+    msg += `📂 *PROJECTS*\n`;
+    data.projects.forEach((p,i) => {
+      msg += `\n#${i+1} ${p.title}\n`;
+      if(p.client) msg += `Client: ${p.client}\n`;
+      if(p.role)   msg += `Role: ${p.role}\n`;
+      if(p.result) msg += `Result: ${p.result}\n`;
+      if(p.link)   msg += `Link: ${p.link}\n`;
+      if(p.tools)  msg += `Tools: ${p.tools}\n`;
+    });
+    msg += sep;
+  }
+
+  // Experience
+  if(data.experience.length) {
+    msg += `💼 *EXPERIENCE*\n`;
+    data.experience.forEach((ex,i) => {
+      msg += `\n#${i+1} ${ex.company} — ${ex.position}\n`;
+      if(ex.dates) msg += `${ex.dates}\n`;
+    });
+    msg += sep;
+  }
+
+  // Social
+  msg += `🔗 *LINKS*\n`;
+  if(data.social.linkedin)  msg += `LinkedIn: ${data.social.linkedin}\n`;
+  if(data.social.upwork)    msg += `Upwork: ${data.social.upwork}\n`;
+  if(data.social.onlinejobs)msg += `OJ.ph: ${data.social.onlinejobs}\n`;
+  if(data.social.website)   msg += `Site: ${data.social.website}\n`;
+  msg += sep;
+
+  // Preferences
+  msg += `🎨 *PREFERENCES*\n`;
+  msg += line('Color', data.preferences.colorScheme);
+  msg += line('Style', data.preferences.siteStyle);
+  msg += line('Goal', data.preferences.goal);
+  if(data.preferences.notes) msg += `Notes: ${data.preferences.notes.substring(0,150)}\n`;
+
+  msg += `\n_Sent via PortfolioForge intake form_`;
+  return msg;
+}
+
+// ── SUBMIT ──
+document.getElementById('mainForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  if(!validate()) {
+    toast('Please fill in all required fields.', 'error');
+    const first = document.querySelector('.error');
+    if(first) first.scrollIntoView({ behavior:'smooth', block:'center' });
+    return;
+  }
+
+  // Collect projects
+  const projects = [];
+  for(let i = 1; i <= projectCount; i++) {
+    const t = (document.querySelector(`[name="proj_title_${i}"]`) || {}).value || '';
+    if(!t) continue;
+    projects.push({
+      title:  t,
+      client: (document.querySelector(`[name="proj_client_${i}"]`) || {}).value || '',
+      tools:  (document.querySelector(`[name="proj_tools_${i}"]`)  || {}).value || '',
+      role:   (document.querySelector(`[name="proj_role_${i}"]`)   || {}).value || '',
+      result: (document.querySelector(`[name="proj_result_${i}"]`) || {}).value || '',
+      link:   (document.querySelector(`[name="proj_link_${i}"]`)   || {}).value || '',
+    });
+  }
+
+  // Collect experience
+  const experience = [];
+  for(let i = 1; i <= experienceCount; i++) {
+    const c = (document.querySelector(`[name="exp_company_${i}"]`)  || {}).value || '';
+    if(!c) continue;
+    experience.push({
+      company:  c,
+      position: (document.querySelector(`[name="exp_position_${i}"]`) || {}).value || '',
+      dates:    (document.querySelector(`[name="exp_dates_${i}"]`)    || {}).value || '',
+    });
+  }
+
+  const data = {
+    personal: {
+      fullName: document.getElementById('fullName').value,
+      proTitle: document.getElementById('proTitle').value,
+      tagline:  document.getElementById('tagline').value,
+      location: document.getElementById('location').value,
+      email:    document.getElementById('email').value,
+      whatsapp: document.getElementById('whatsapp').value,
+      phone:    document.getElementById('phone').value,
+    },
+    about: {
+      bio:      document.getElementById('bio').value,
+      yearsExp: document.getElementById('yearsExp').value,
+    },
+    services: Array.from(document.querySelectorAll('#servicesGrid .check-item.active'))
+                    .map(el => el.querySelector('.check-label').textContent),
+    otherServices: document.getElementById('otherServices').value,
+    tools: document.getElementById('tools').value,
+    projects,
+    experience,
+    social: {
+      linkedin:   document.getElementById('linkedin').value,
+      facebook:   document.getElementById('facebook').value,
+      instagram:  document.getElementById('instagram').value,
+      upwork:     document.getElementById('upwork').value,
+      onlinejobs: document.getElementById('onlinejobs').value,
+      website:    document.getElementById('website').value,
+    },
+    preferences: {
+      colorScheme: (document.querySelector('[name="colorScheme"]:checked') || {}).value || '',
+      siteStyle:   (document.querySelector('[name="siteStyle"]:checked')   || {}).value || '',
+      goal:        document.getElementById('goal').value,
+      notes:       document.getElementById('notes').value,
+    }
+  };
+
+  // Update submit button to loading state
+  const btn = document.querySelector('.btn-submit');
+  btn.disabled = true;
+  btn.innerHTML = '⏳ Sending to WhatsApp…';
+
+  try {
+    const message = buildMessage(data);
+    await sendWhatsApp(message);
+    // Show success
+    document.getElementById('mainForm').style.display = 'none';
+    document.getElementById('successScreen').classList.add('show');
+    window.scrollTo({ top: 0, behavior:'smooth' });
+  } catch(err) {
+    btn.disabled = false;
+    btn.innerHTML = 'Submit My Info &nbsp;→';
+    toast('Could not send to WhatsApp. Please check your API key.', 'error');
+    console.error(err);
+  }
+});
+
+// Clear error on input
+document.querySelectorAll('input, textarea, select').forEach(el => {
+  el.addEventListener('input', () => el.classList.remove('error'));
+});
+</script>
 </body>
 </html>
